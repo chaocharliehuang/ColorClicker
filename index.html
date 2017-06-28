@@ -16,14 +16,24 @@
           }
           $(document).ready(function(){
              $('#large_box').click(function(){
-                alert('you clicked the big box!');  
-         //comment this out when you have figured out what event.stopPropagation is used for
+                 $(this).css('background-color', random_color());
+                 $('#left-box').css('background-color', random_color());
+                 $('.middle_box').css('background-color', random_color());
+                 $('#right-box').css('background-color', random_color());
              })
              $('.side_box').click(function(event){
-                event.stopPropagation();
+                 console.log(event.target.id);
+                 if (event.target.id === 'left-box') {
+                    $('#right-box').css('background-color', random_color());
+                 } else {
+                    $('#left-box').css('background-color', random_color());
+                 }
+                 $('.middle_box').css('background-color', random_color());
+                 event.stopPropagation();
              })
              $('.middle_box').click(function(event){
-                event.stopPropagation();
+                 $('#large_box').css('background-color', random_color());
+                 event.stopPropagation();
              })
           });
       </script>
@@ -53,9 +63,9 @@
    <body>
       <h1>The Codingdojo ColorClicker! </h1>
       <div id='large_box'>
-          <div class='side_box'></div>
+          <div class='side_box' id="left-box"></div>
           <div class='middle_box'></div>
-          <div class='side_box'></div>
+          <div class='side_box' id="right-box"></div>
       </div>
       <h2>Rules</h2>
       <h3>1. Clicking the big box should change background colors of both the small and large boxes!</h3>
